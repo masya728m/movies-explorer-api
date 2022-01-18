@@ -46,5 +46,6 @@ router.post('/signup', celebrate({
 }), createUser);
 router.use(auth);
 router.use('/users', require('./users'));
+router.use('/movies', require('./movies'));
 
 module.exports = router;
