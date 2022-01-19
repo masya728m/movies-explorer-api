@@ -57,12 +57,12 @@ module.exports.login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
-        {_id: user._id},
+        { _id: user._id },
         JWT_SECRET,
-        {expiresIn: '1h'}
+        { expiresIn: '1h' }
       );
       res.status(200)
-        .send({token});
+        .send({ token });
     })
     .catch(next);
 };

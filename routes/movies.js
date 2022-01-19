@@ -12,13 +12,11 @@ const {
 } = require('../controllers/movies');
 const InvalidDataError = require('../errors/invalidDataError');
 
-const validateUrl = (fieldName) => {
-  return (value) => {
-    if (!validator.isURL(value, {require_protocol: true})) {
-      throw new InvalidDataError(`Failed to validate ${fieldName} field`);
-    }
-    return value;
-  };
+const validateUrl = (fieldName) => (value) => {
+  if (!validator.isURL(value, { require_protocol: true })) {
+    throw new InvalidDataError(`Failed to validate ${fieldName} field`);
+  }
+  return value;
 };
 
 router.get('/', getMovies);

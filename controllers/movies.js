@@ -47,21 +47,20 @@ module.exports.createMovie = (req, res, next) => {
 
 module.exports.getMovies = (req, res, next) => {
   const owner = req.user._id;
-  Movie.find({owner})
+  Movie.find({ owner })
     .then((movies) => res.send(movies))
     .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  const {movieId} = req.params;
+  const { movieId } = req.params;
   const owner = req.user._id;
   Movie.findById(movieId)
     .orFail(() => next(new NotFoundError('no such movie')))
     .then((movie) => {
-      if (!movie.owner.equals(owner))
-        return next(new ForbiddenError('Attempt to delete movie created by someone else'));
+      if (!movie.owner.equals(owner)) return next(new ForbiddenError('Attempt to delete movie created by someone else'));
       return movie.remove()
-        .then(() => res.send({message: 'Movie has been successfully deleted'}));
+        .then(() => res.send({ message: 'Movie has been successfully deleted' }));
     })
     .catch(next);
 };

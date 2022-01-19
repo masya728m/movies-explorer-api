@@ -2,8 +2,8 @@ require('dotenv')
   .config();
 const express = require('express');
 const mongoose = require('mongoose');
-const {errors} = require('celebrate');
-const {requestLogger, errorLogger} = require('./middlewares/logger');
+const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/notFoundError');
 
 const {

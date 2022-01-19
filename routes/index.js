@@ -12,7 +12,7 @@ const {
 const auth = require('../middlewares/auth');
 
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Server is about to crash...');
