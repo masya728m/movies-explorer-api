@@ -6,8 +6,8 @@ const NotFoundError = require('../errors/notFoundError');
 const ConflictError = require('../errors/conflictError');
 
 const {
-  JWT_SECRET = 'dev-secret-key',
-} = process.env;
+  JWT_SECRET,
+} = require('../utils/config');
 
 module.exports.getUser = (req, res, next) => {
   const id = req.params.id || req.user._id;
