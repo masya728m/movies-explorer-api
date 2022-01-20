@@ -72,7 +72,8 @@ module.exports.updateUserProfile = (req, res, next) => {
     name,
     email,
   } = req.body;
-  User.findByIdAndUpdate(req.user._id, {
+
+  const updateUser = () => User.findByIdAndUpdate(req.user._id, {
     name,
     email,
   }, {
@@ -86,4 +87,14 @@ module.exports.updateUserProfile = (req, res, next) => {
       }
       return next(err);
     });
+
+  User.findOne({ email })
+    .then((user) => {
+      if (!user._id.equals(req.user._id)) {
+        return next(new ConflictError(`Email ${email} is already taken`));
+      }
+
+      return updateUser();
+    })
+    .catch(() => updateUser());
 };
