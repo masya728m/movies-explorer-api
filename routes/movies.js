@@ -50,9 +50,8 @@ router.post('/', celebrate({
       thumbnail: Joi.string()
         .required()
         .custom(validateUrl('thumbnail')),
-      movieId: Joi.string()
-        .required()
-        .hex(),
+      movieId: Joi.number()
+        .required(),
       nameRU: Joi.string()
         .required(),
       nameEN: Joi.string()
