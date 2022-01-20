@@ -1,6 +1,5 @@
 const router = require('express')
   .Router();
-const validator = require('validator');
 const {
   celebrate,
   Joi,
@@ -10,14 +9,7 @@ const {
   deleteMovie,
   getMovies,
 } = require('../controllers/movies');
-const InvalidDataError = require('../errors/invalidDataError');
-
-const validateUrl = (fieldName) => (value) => {
-  if (!validator.isURL(value, { require_protocol: true })) {
-    throw new InvalidDataError(`Failed to validate ${fieldName} field`);
-  }
-  return value;
-};
+const { validateUrl } = require('../utils/validation');
 
 router.get('/', getMovies);
 router.delete('/:movieId', celebrate({
