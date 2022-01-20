@@ -3,6 +3,8 @@ require('dotenv')
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
+const limiter = require('./middlewares/rateLimit');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/notFoundError');
 
@@ -13,7 +15,11 @@ const {
 
 const app = express();
 
+app.use(limiter);
+
 app.use(requestLogger);
+
+app.use(helmet);
 
 app.use(require('./middlewares/cors'));
 
