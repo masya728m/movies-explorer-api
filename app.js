@@ -32,13 +32,13 @@ const options = {
   useUnifiedTopology: true,
 };
 
-mongoose.connect(DB_URL, options, (err) => {
-  if (err) {
+mongoose.connect(DB_URL, options)
+  .then(() => {
+    console.log(`Connected to database ${DB_URL}`);
+    app.listen(PORT, () => {
+      console.log(`App has been started on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
     console.log('Unable to connect to the server. Please start the server. Error:', err);
-    return;
-  }
-  console.log(`Connected to database ${DB_URL}`);
-  app.listen(PORT, () => {
-    console.log(`App has been started on port ${PORT}`);
   });
-});
