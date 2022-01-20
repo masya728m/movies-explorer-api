@@ -30,13 +30,13 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('invalid data');
+        throw new UnauthorizedError('Invalid username or password');
       }
 
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            throw new UnauthorizedError('invalid data');
+            throw new UnauthorizedError('Invalid username or password');
           }
           return user;
         });
