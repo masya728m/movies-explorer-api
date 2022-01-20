@@ -6,10 +6,10 @@ const requestLogger = expressWinston.logger({
     new winston.transports.File({
       filename: 'request.log',
       maxsize: 10000000, // 10MB
-      maxFiles: 10
-    })
+      maxFiles: 10,
+    }),
   ],
-  format: winston.format.json()
+  format: winston.format.json(),
 });
 
 const errorLogger = expressWinston.logger({
@@ -17,13 +17,13 @@ const errorLogger = expressWinston.logger({
     new winston.transports.File({
       filename: 'error.log',
       maxsize: 10000000, // 10MB
-      maxFiles: 10
-    })
+      maxFiles: 10,
+    }),
   ],
-  format: winston.format.json()
+  format: winston.format.json(),
 });
 
 module.exports = {
   requestLogger,
-  errorLogger
+  errorLogger,
 };

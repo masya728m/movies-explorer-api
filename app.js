@@ -8,7 +8,7 @@ const NotFoundError = require('./errors/notFoundError');
 
 const {
   PORT = 3000,
-  DB_URL = 'mongodb://127.0.0.1:27017/'
+  DB_URL = 'mongodb://127.0.0.1:27017/',
 } = process.env;
 
 const app = express();
@@ -29,7 +29,7 @@ app.use(require('./middlewares/error'));
 
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 
 mongoose.connect(DB_URL, options, (err) => {

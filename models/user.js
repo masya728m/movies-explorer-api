@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
-    maxlength: 30
+    maxlength: 30,
   },
   email: {
     type: String,
@@ -15,14 +15,14 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: (props) => `${props.value} is not valid email address`
-    }
+      message: (props) => `${props.value} is not valid email address`,
+    },
   },
   password: {
     type: String,
     required: true,
-    select: false
-  }
+    select: false,
+  },
 });
 
 userSchema.statics.findUserByCredentials = function (email, password) {

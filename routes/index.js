@@ -3,11 +3,11 @@ const router = require('express')
 const bodyParser = require('body-parser');
 const {
   celebrate,
-  Joi
+  Joi,
 } = require('celebrate');
 const {
   login,
-  createUser
+  createUser,
 } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 
@@ -26,8 +26,8 @@ router.post('/signin', celebrate({
         .email(),
       password: Joi.string()
         .required()
-        .min(7)
-    })
+        .min(7),
+    }),
 }), login);
 router.post('/signup', celebrate({
   body: Joi.object()
@@ -41,8 +41,8 @@ router.post('/signup', celebrate({
         .email(),
       password: Joi.string()
         .required()
-        .min(7)
-    })
+        .min(7),
+    }),
 }), createUser);
 router.use(auth);
 router.use('/users', require('./users'));

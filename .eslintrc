@@ -1,13 +1,6 @@
 {
   "extends": "airbnb-base",
   "rules": {
-    "leadingUnderscore": "off",
-    "no-console": "off",
-    "comma-dangle": "off",
-    "no-underscore-dangle": "off",
-    "linebreak-style": [
-      "error",
-      "unix"
-    ]
+    "no-underscore-dangle": "off"
   }
 }

@@ -3,12 +3,12 @@ const router = require('express')
 const validator = require('validator');
 const {
   celebrate,
-  Joi
+  Joi,
 } = require('celebrate');
 const {
   createMovie,
   deleteMovie,
-  getMovies
+  getMovies,
 } = require('../controllers/movies');
 const InvalidDataError = require('../errors/invalidDataError');
 
@@ -25,8 +25,8 @@ router.delete('/:movieId', celebrate({
     .keys({
       movieId: Joi.string()
         .length(24)
-        .hex()
-    })
+        .hex(),
+    }),
 }), deleteMovie);
 router.post('/', celebrate({
   body: Joi.object()
@@ -56,7 +56,7 @@ router.post('/', celebrate({
       nameRU: Joi.string()
         .required(),
       nameEN: Joi.string()
-        .required()
-    })
+        .required(),
+    }),
 }), createMovie);
 module.exports = router;

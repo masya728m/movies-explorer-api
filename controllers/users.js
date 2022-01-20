@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/notFoundError');
 const ConflictError = require('../errors/conflictError');
 
 const {
-  JWT_SECRET = 'dev-secret-key'
+  JWT_SECRET = 'dev-secret-key',
 } = process.env;
 
 module.exports.getUser = (req, res, next) => {
@@ -23,19 +23,19 @@ module.exports.createUser = (req, res, next) => {
   const {
     name,
     email,
-    password
+    password,
   } = req.body;
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name,
       email,
-      password: hash
+      password: hash,
     })
       .then(() => res.send({
         data: {
           name,
-          email
-        }
+          email,
+        },
       })))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -51,7 +51,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const {
     email,
-    password
+    password,
   } = req.body;
 
   User.findUserByCredentials(email, password)
@@ -59,7 +59,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         JWT_SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '1h' },
       );
       res.status(200)
         .send({ token });
@@ -70,14 +70,14 @@ module.exports.login = (req, res, next) => {
 module.exports.updateUserProfile = (req, res, next) => {
   const {
     name,
-    email
+    email,
   } = req.body;
   User.findByIdAndUpdate(req.user._id, {
     name,
-    email
+    email,
   }, {
     new: true,
-    runValidators: true
+    runValidators: true,
   })
     .then((user) => res.send(user))
     .catch((err) => {

@@ -2,11 +2,11 @@ const router = require('express')
   .Router();
 const {
   celebrate,
-  Joi
+  Joi,
 } = require('celebrate');
 const {
   getUser,
-  updateUserProfile
+  updateUserProfile,
 } = require('../controllers/users');
 
 router.get('/me', getUser);
@@ -18,8 +18,8 @@ router.patch('/me', celebrate({
         .min(2),
       email: Joi.string()
         .required()
-        .email()
-    })
+        .email(),
+    }),
 }), updateUserProfile);
 
 module.exports = router;
